@@ -27,7 +27,7 @@ class SubsController < ApplicationController
   end
 
   def destroy
-    Sub.destroy
+    @sub.destroy
     redirect_to subs_path
   end
 
