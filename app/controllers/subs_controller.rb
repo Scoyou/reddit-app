@@ -2,7 +2,7 @@ class SubsController < ApplicationController
   before_action :set_sub, only: [:show, :edit, :update, :destroy]
 
   def index
-    @subs = Subs.all
+    @subs = Sub.all
   end
 
   def show
@@ -10,18 +10,20 @@ class SubsController < ApplicationController
 
   def new
     @sub = Sub.new
+    render partial: 'form'
   end
 
   def create
     @sub = Sub.new(sub_params)
-    @sub.save ? redirect_to subs_path : (render :new)
+    @sub.save ? (redirect_to subs_path) : (render :new)
   end
 
   def edit
+    render partial: 'form'
   end
 
   def update
-    @sub.update(sub_params) ? redirect_to subs_path : (render :edit)
+    @sub.update(sub_params) ? (redirect_to subs_path) : (render :edit)
   end
 
   def destroy
@@ -32,11 +34,10 @@ class SubsController < ApplicationController
   private
 
   def sub_params
-    params.require(:model_name).permit(:name)
+    params.require(:sub).permit(:name)
   end
 
   def set_sub
     @sub = Sub.find(params[:id])
   end
-
 end
